@@ -1,0 +1,99 @@
+<script>
+  { 
+    active: true, 
+    uid: 'cube', 
+    title: 'Infinite Cube',
+    date: '2020-02-01', 
+    from: 'https://beesandbombs.tumblr.com/post/76725415066/splitting-squares' 
+  }
+</script>
+
+<style lang="scss">
+  $orders: 3 6 9 8 7 4 1 2;
+  $speed: 100;
+  $duration: 2s;
+
+  .window {
+    overflow: hidden;
+    position: relative;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 500px;
+    height: 500px;
+    outline: solid 4000px #fff;
+    z-index: 1;
+  }
+
+  .container {
+    width: 240px;
+    height: 240px;
+    animation: rotate $duration linear infinite;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  @keyframes rotate {
+    0% { transform: rotate(0deg) scale(1) }
+    50% { transform: rotate(-45deg) scale(1.7) }
+    100% { transform: rotate(-90deg) scale(3) }
+  }
+
+  square {
+    width: 80px;
+    height: 80px;
+    float: left;
+    background: #000;
+    outline: 1px solid #000;
+  }
+
+  @for $i from 0 to 8 {
+    $order: nth($orders, ($i + 1));
+      
+    square:nth-child(#{$order}) {
+      animation: move#{($order)} $duration infinite;
+    }
+    
+    $x: 0;
+    $y: 0;
+
+    @if $order % 3 == 1 { // left side
+      $x: -1;
+    } @elseif $order % 3 == 0 { // right side
+      $x: 1;
+    }
+      
+    @if $order < 4 { // top side
+      $y: -1;
+    } @elseif $order > 6 { // bottom side
+      $y: 1;
+    }
+    
+    $coeff: 8 - $i;
+    
+    @keyframes move#{$order} {
+      0% { transform: translate(0, 0) }
+      #{(100 / 8 * $i)}% {
+        transform: translate(0, 0)
+      }
+      100% { transform: translate(
+        #{$x * $speed * $coeff}px,
+        #{$y * $speed * $coeff}px
+      ) }
+    }
+  }
+</style>
+
+<template>
+  <div class="window">
+    <div class="container">
+      <square>&nbsp;</square><square>&nbsp;</square><square>&nbsp;</square><square>&nbsp;</square><square>&nbsp;</square><square>&nbsp;</square>  <square>&nbsp;</square><square>&nbsp;</square><square>&nbsp;</square>
+    </div>
+  </div>
+</template>
