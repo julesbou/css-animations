@@ -1,6 +1,6 @@
 <script>
   { 
-    active: false, 
+    active: true, 
     uid: 'cube-assembling', 
     title: 'Cube Assembling',
     date: '2020-10-29', 
@@ -19,11 +19,12 @@
   }
 
   table {
-    animation: zoom $duration infinite cubic-bezier(0.45, 0.29, 0.21, 0.94);
+    animation: infinite-cube-zoom $duration infinite;
+    animation-timing-function: cubic-bezier(0.45, 0.29, 0.21, 0.94);
     border-spacing: 0;
   }
 
-  @keyframes zoom {
+  @keyframes infinite-cube-zoom {
     0% { transform: scale(7) translateZ(0); }
     100% { transform: scale(1) translateZ(0); }
   }
@@ -48,6 +49,7 @@
     }
     @return $x1;
   }
+  
   @function pow($number, $exponent) {
     $value: 1;
     @if $exponent > 0 {
@@ -61,7 +63,7 @@
   @for $x from 1 to 8 {
     @for $y from 1 to 8 {
       table tr:nth-child(#{$y}) td:nth-child(#{$x}) {
-        animation-name: square#{$x}#{$y};
+        animation-name: infinite-cube-square#{$x}#{$y};
       }
       $rotate: (
         ($x % 2 == 0 and $y % 2 == 1) or
@@ -70,7 +72,7 @@
       $distFromCenter: sqrt(pow(abs(4 - $x), 2) + pow(abs(4 - $y), 2));
       $counterRotate: $distFromCenter <= 3 and $distFromCenter > 1;
       
-      @keyframes square#{$x}#{$y} {
+      @keyframes infinite-cube-square#{$x}#{$y} {
         0% {
           transform: 
             translate(($x - 4) * 50px, ($y - 4) * 50px)
@@ -89,7 +91,6 @@
     }
   }
 </style>
-
 
 <template>
   <table>

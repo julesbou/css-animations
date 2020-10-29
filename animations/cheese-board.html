@@ -1,7 +1,7 @@
 <script>
   { 
     active: true, 
-    uid: 'cheese',
+    uid: 'cheese-board',
     title: 'Cheese Board', 
     date: '2020-10-16', 
     from: 'https://beesandbombs.tumblr.com/post/117860424954/squares-circles'
@@ -15,18 +15,18 @@
   table {
     border-spacing: 0;
     animation:
-      bg $speed infinite,
-      zoom $speed infinite;
+      cheese-board-bg $speed infinite,
+      cheese-board-zoom $speed infinite;
   }
 
-  @keyframes bg {
+  @keyframes cheese-board-bg {
     0% { background: #fff; }
     50% { background: #fff; }
     50.00001% { background: #000; }
     100% { background: #000; }
   }
 
-  @keyframes zoom {
+  @keyframes cheese-board-zoom {
     0% { transform: scale(1); }
     10% { transform: scale(1); }
     15% { transform: scale(1.6); }
@@ -41,25 +41,25 @@
 
   table td {
     box-sizing: border-box;
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
   }
 
   tr:nth-child(odd) td:nth-child(odd),
   tr:nth-child(even) td:nth-child(even) {
     animation: 
-      border-radius $speed / 2 infinite,
-      bg-invert $speed infinite;
+    cheese-board-border-radius $speed / 2 infinite,
+      cheese-board-bg-invert $speed infinite;
   }
 
-  @keyframes bg-invert {
+  @keyframes cheese-board-bg-invert {
     0% { background: #000; }
     50% { background: #000; }
     50.00001% { background: #fff; }
     100% { background: #fff; }
   }
 
-  @keyframes border-radius {
+  @keyframes cheese-board-border-radius {
     0% { border-radius: 0; transform: scale(1); }
     20% { border-radius: 0; transform: scale(1); }
     30% { border-radius: 50%; transform: scale(0.6) }
@@ -69,14 +69,14 @@
   }
 
   tr:nth-child(odd) {
-    animation: trans-odd $speed infinite;
+    animation: cheese-board-trans-odd $speed infinite;
   }
 
   tr:nth-child(even) {
-    animation: trans-even $speed infinite;
+    animation: cheese-board-trans-even $speed infinite;
   }
 
-  @keyframes trans-odd {
+  @keyframes cheese-board-trans-odd {
     0% { transform: translate(0, 0); }
     20% { transform: translate(0, 0); }
     30% { transform: translate(100% / $line, 0) } 
@@ -87,7 +87,7 @@
     100% { transform: translate(0, 100%) }
   }
 
-  @keyframes trans-even {
+  @keyframes cheese-board-trans-even {
     0% { transform: translate(0, 0); }
     20% { transform: translate(0, 0); }
     30% { transform: translate(-100% / $line, 0); } 
@@ -97,6 +97,8 @@
     80% { transform: translate(0, -100%) } 
     100% { transform: translate(0, -100%) }
   }
+
+
 </style>
 
 

@@ -72,6 +72,8 @@ main {
 .back {
   display: none;
   align-self: flex-start;
+  align-items: center;
+  margin: 20px;
 }
 
 .back:before {
@@ -208,6 +210,8 @@ article .source pre {
   padding-left: 0;
   color: #fff;
   background: #5D4157;
+  font-size: 12px;
+  overflow-x: auto;
 }
 
 article .source pre + pre {

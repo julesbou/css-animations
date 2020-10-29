@@ -5,7 +5,6 @@ const cheerio = require('cheerio')
 const dir = fs.opendirSync('./animations')
 const json = []
 
-
 let file
 while ((file = dir.readSync()) !== null) {
   const content = fs.readFileSync('./animations/' + file.name).toString()

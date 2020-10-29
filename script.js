@@ -1,5 +1,5 @@
 
-const template = ({ title, uid, date, from, template, css, scss }) => {
+const template = ({ title, uid, date, from, template, css, scss }, singlePage) => {
   return `
     <article id="${uid}">
       <h1 class="title"><a href="#${uid}">${title}</a></h1>
@@ -10,12 +10,12 @@ const template = ({ title, uid, date, from, template, css, scss }) => {
         <span class="from"><b>Inspired from:</b><br> <a href="${from}">${from}</a></span>
       </p>
       <footer>
-        <p class="permalink"><a href="#${uid}">direct link</a></p>
-        <p class="viewsource"><a>source code of the CSS animation</a></p>
+        ${singlePage ? '' : `<p class="permalink"><a href="#${uid}">See alone</a></p>`}
+        <p class="viewsource"><a>SCSS code of animation</a></p>
       </footer>
       <div class="source">
         <pre>${scss}</pre>
-        <pre>${template.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</pre>
+        <!--<pre>${template.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</pre>-->
       </div>
     </article>
   `
@@ -41,16 +41,23 @@ function displayAnimations() {
   displayedAnimations.sort((a, b) => {
     return a.date < b.date ? 1 : -1
   })
+
+  // animation not found
+  if (hash && !displayedAnimations.length) {
+    console.error('animation not found')
+    window.location.hash = ''
+    return
+  }
   
   // toggle back navigation link
-  $back.style.display = displayedAnimations.length === 1 ? 'block' : 'none'
+  $back.style.display = displayedAnimations.length === 1 ? 'flex' : 'none'
 
   // keep loader on screen a few extra ms
   setTimeout(function() {
 
     // render each animation
     displayedAnimations.forEach(animation => {
-      $list.insertAdjacentHTML('beforeend', template(animation))
+      $list.insertAdjacentHTML('beforeend', template(animation, !!hash))
     })
 
   }, animations.length === 1 ? 0 : 500)
