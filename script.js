@@ -45,7 +45,6 @@ function displayAnimations() {
   // toggle back navigation link
   $back.style.display = displayedAnimations.length === 1 ? 'block' : 'none'
 
-
   // keep loader on screen a few extra ms
   setTimeout(function() {
 
