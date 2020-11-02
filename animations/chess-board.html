@@ -12,11 +12,6 @@
   $speed: 4s;
   $line: 12;
 
-  &, table, tr, td {
-    -webkit-backface-visibility: hidden;
-    -webkit-transform-style: preserve-3d;
-  }
-
   table {
     border-spacing: 0;
     animation:
@@ -101,6 +96,12 @@
     70% { transform: translate(0, 0); }
     80% { transform: translate(0, -100%) } 
     100% { transform: translate(0, -100%) }
+  }
+
+  /* fix flickering on safari (most of the time) */
+  table, tr, td {
+    -webkit-backface-visibility: hidden;
+    -webkit-transform-style: preserve-3d;
   }
 </style>
 
