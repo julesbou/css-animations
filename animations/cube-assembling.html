@@ -1,6 +1,6 @@
 <script>
   { 
-    active: false, 
+    active: true, 
     uid: 'cube-assembling', 
     title: 'Cube Assembling',
     date: '2020-10-29', 
@@ -75,7 +75,7 @@
       @keyframes infinite-cube-square#{$x}#{$y} {
         0% {
           transform: 
-            translate(($x - 4) * 50px, ($y - 4) * 50px)
+            translate(($x - 4) * 80px, ($y - 4) * 80px)
             rotate(if($rotate, if($counterRotate, 90deg, -90deg), 0))
             scale(if($rotate, .01, 1))
           ;

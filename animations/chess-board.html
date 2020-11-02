@@ -1,8 +1,8 @@
 <script>
   { 
     active: true, 
-    uid: 'cheese-board',
-    title: 'Cheese Board', 
+    uid: 'chess-board',
+    title: 'Chess Board', 
     date: '2020-10-16', 
     from: 'https://beesandbombs.tumblr.com/post/117860424954/squares-circles'
   }
@@ -12,18 +12,23 @@
   $speed: 3.5s;
   $line: 12;
 
+  &, table, tr, td {
+    -webkit-backface-visibility: hidden;
+    -webkit-transform-style: preserve-3d;
+  }
+
   table {
     border-spacing: 0;
     animation:
-      cheese-board-bg $speed infinite,
-      cheese-board-zoom $speed infinite;
+      cheese-board-bg $speed infinite steps(1, end),
+      cheese-board-zoom $speed infinite
+    ;
   }
 
   @keyframes cheese-board-bg {
     0% { background: #fff; }
-    50% { background: #fff; }
-    50.00001% { background: #000; }
-    100% { background: #000; }
+    50% { background: #000; }
+    100% { background: #fff; }
   }
 
   @keyframes cheese-board-zoom {
@@ -39,6 +44,19 @@
     100% { transform: scale(1); }
   }
 
+  table {
+    counter-reset: row-num;
+  }
+  table tr td {
+    counter-increment: row-num;
+  }
+  table tr td::before {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    content: counter(row-num);
+  }
+
   table td {
     box-sizing: border-box;
     width: 40px;
@@ -48,15 +66,15 @@
   tr:nth-child(odd) td:nth-child(odd),
   tr:nth-child(even) td:nth-child(even) {
     animation: 
-    cheese-board-border-radius $speed / 2 infinite,
-      cheese-board-bg-invert $speed infinite;
+      cheese-board-border-radius $speed / 2 infinite,
+      cheese-board-bg-invert $speed infinite steps(1, end)
+    ;
   }
 
   @keyframes cheese-board-bg-invert {
     0% { background: #000; }
-    50% { background: #000; }
-    50.00001% { background: #fff; }
-    100% { background: #fff; }
+    50% { background: #fff; }
+    100% { background: #000; }
   }
 
   @keyframes cheese-board-border-radius {
@@ -69,36 +87,46 @@
   }
 
   tr:nth-child(odd) {
-    animation: cheese-board-trans-odd $speed infinite;
+    animation: 
+      cheese-board-trans-right $speed / 2 infinite,
+      cheese-board-trans-bottom $speed / 2 infinite $speed / 2 steps(1, start)
+    ;
   }
 
   tr:nth-child(even) {
-    animation: cheese-board-trans-even $speed infinite;
+    animation: 
+      cheese-board-trans-left $speed / 2 infinite,
+      cheese-board-trans-top $speed / 2 infinite $speed / 2 steps(1, start)
+    ;
+  }
+  
+  @keyframes cheese-board-trans-right {
+    0% { transform: translate(0, 0); }
+    40% { transform: translate(0, 0); }
+    60% { transform: translate(100% / $line, 0) } 
+    100% { transform: translate(100% / $line, 0) }
   }
 
-  @keyframes cheese-board-trans-odd {
+  @keyframes cheese-board-trans-bottom {
     0% { transform: translate(0, 0); }
-    20% { transform: translate(0, 0); }
-    30% { transform: translate(100% / $line, 0) } 
-    50% { transform: translate(100% / $line, 0) }
-    50.0001% { transform: translate(0, 0); }
-    70% { transform: translate(0, 0); }
-    80% { transform: translate(0, 100%) } 
+    40% { transform: translate(0, 0); }
+    60% { transform: translate(0, 100%) } 
     100% { transform: translate(0, 100%) }
   }
 
-  @keyframes cheese-board-trans-even {
+  @keyframes cheese-board-trans-left {
     0% { transform: translate(0, 0); }
-    20% { transform: translate(0, 0); }
-    30% { transform: translate(-100% / $line, 0); } 
-    50% { transform: translate(-100% / $line, 0); }
-    50.0001% { transform: translate(0, 0); }
-    70% { transform: translate(0, 0); }
-    80% { transform: translate(0, -100%) } 
-    100% { transform: translate(0, -100%) }
+    40% { transform: translate(0, 0); }
+    60% { transform: translate(-100% / $line, 0); } 
+    100% { transform: translate(-100% / $line, 0); }
   }
 
-
+  @keyframes cheese-board-trans-top {
+    0% { transform: translate(0, 0); }
+    40% { transform: translate(0, 0); }
+    60% { transform: translate(0, -100%) } 
+    100% { transform: translate(0, -100%) }
+  }
 </style>
 
 
