@@ -9,7 +9,7 @@
 </script>
 
 <style lang="scss">
-  $speed: 3.5s;
+  $speed: 4s;
   $line: 12;
 
   &, table, tr, td {
@@ -44,19 +44,6 @@
     100% { transform: scale(1); }
   }
 
-  table {
-    counter-reset: row-num;
-  }
-  table tr td {
-    counter-increment: row-num;
-  }
-  table tr td::before {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    content: counter(row-num);
-  }
-
   table td {
     box-sizing: border-box;
     width: 40px;
@@ -87,44 +74,32 @@
   }
 
   tr:nth-child(odd) {
-    animation: 
-      cheese-board-trans-right $speed / 2 infinite,
-      cheese-board-trans-bottom $speed / 2 infinite $speed / 2 steps(1, start)
-    ;
+    animation: cheese-board-trans-odd $speed infinite;
   }
 
   tr:nth-child(even) {
-    animation: 
-      cheese-board-trans-left $speed / 2 infinite,
-      cheese-board-trans-top $speed / 2 infinite $speed / 2 steps(1, start)
-    ;
+    animation: cheese-board-trans-even $speed infinite;
   }
   
-  @keyframes cheese-board-trans-right {
+  @keyframes cheese-board-trans-odd {
     0% { transform: translate(0, 0); }
-    40% { transform: translate(0, 0); }
-    60% { transform: translate(100% / $line, 0) } 
-    100% { transform: translate(100% / $line, 0) }
-  }
-
-  @keyframes cheese-board-trans-bottom {
-    0% { transform: translate(0, 0); }
-    40% { transform: translate(0, 0); }
-    60% { transform: translate(0, 100%) } 
+    20% { transform: translate(0, 0); }
+    30% { transform: translate(100% / $line, 0) } 
+    50% { transform: translate(100% / $line, 0) }
+    50.01% { transform: translate(0, 0); }
+    70% { transform: translate(0, 0); }
+    80% { transform: translate(0, 100%) } 
     100% { transform: translate(0, 100%) }
   }
 
-  @keyframes cheese-board-trans-left {
+  @keyframes cheese-board-trans-even {
     0% { transform: translate(0, 0); }
-    40% { transform: translate(0, 0); }
-    60% { transform: translate(-100% / $line, 0); } 
-    100% { transform: translate(-100% / $line, 0); }
-  }
-
-  @keyframes cheese-board-trans-top {
-    0% { transform: translate(0, 0); }
-    40% { transform: translate(0, 0); }
-    60% { transform: translate(0, -100%) } 
+    20% { transform: translate(0, 0); }
+    30% { transform: translate(-100% / $line, 0); } 
+    50% { transform: translate(-100% / $line, 0); }
+    50.01% { transform: translate(0, 0); }
+    70% { transform: translate(0, 0); }
+    80% { transform: translate(0, -100%) } 
     100% { transform: translate(0, -100%) }
   }
 </style>
