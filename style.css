@@ -9,6 +9,10 @@ body {
   margin: 0;
 }
 
+body.standby .anim * {
+  animation-play-state: paused !important;
+}
+
 a {
   text-decoration: none;
   color: #49708A;
@@ -189,6 +193,7 @@ article .permalink:before {
 
 article .viewsource {
   margin-left: 20px;
+  user-select: none;
 }
 
 article .viewsource:before {

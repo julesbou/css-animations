@@ -1,0 +1,102 @@
+<script>
+  { 
+    active: true, 
+    uid: 'dot-inversion',
+    title: 'Dot Inversion', 
+    date: '2020-11-05', 
+    from: 'https://beesandbombs.tumblr.com/post/110755349929/dribbblepopular-dot-inversion-follow-me-on'
+  }
+</script>
+
+<style lang="scss">
+  --min-diameter: 50px;
+  --max-diameter: 1000px;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .circle {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    background: #508CE0;
+    border-radius: 50%;
+    transform-origin: 0 50%;
+    transform: translate(-25px, -50%) scale(1, 1);
+    animation: 
+      dotInversionSize 1s infinite cubic-bezier(0.46, 0.06, 1, 0.1) alternate,
+      dotInversionColor 4s infinite steps(1, end),
+      dotInversionAlternate 2s infinite steps(1, end),
+      dotInversionMove 2s infinite ease-in-out,
+    ;
+  }
+
+  @keyframes dotInversionSize {
+    0% {
+      width: var(--min-diameter);
+      height: var(--min-diameter);
+    }
+    25% {
+      width: var(--min-diameter);
+      height: var(--min-diameter);
+    }
+    100% {
+      width: var(--max-diameter);
+      height: var(--max-diameter);
+    }
+  }
+
+  @keyframes dotInversionColor {
+    0% {
+      background: #508CE0;
+      box-shadow: 0 0 1000px 1000px #efefef;
+    }
+    25% {
+      background: #efefef;
+      box-shadow: 0 0 1000px 1000px #508CE0;
+    }
+    75% {
+      background: #508CE0;
+      box-shadow: 0 0 1000px 1000px #efefef;
+    }
+  }
+
+  @keyframes dotInversionAlternate {
+    0% {   
+      transform: translate(-25px, -50%) scale(1, 1);
+    }
+    50% {
+      transform: translate(25px, -50%) scale(-1, 1);
+    }
+  }
+
+  @keyframes dotInversionMove {
+    0% {   
+      margin-left: 0;
+    }
+    50% {
+      margin-left: 25px;
+    }
+    50.01% {
+      margin-left: -25px;
+    }
+    100% {
+      margin-left: 0;
+    }
+  }
+</style>
+
+
+<template>
+  <div class="container">
+    <div class="circle"></div>
+  </div>
+</template>
